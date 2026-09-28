@@ -1,6 +1,10 @@
-const title = document.querySelector('#title');
-const section = document.querySelector('#section');
-const button = document.querySelector('#button');
+let title = document.querySelector('#title');
+let section = document.querySelector('#section');
+let button = document.querySelector('#button');
+
+const berekenPunten = (aantalKlikken) => {
+  return aantalKlikken * 10;
+}
 
 
 
