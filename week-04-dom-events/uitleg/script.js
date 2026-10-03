@@ -1,11 +1,6 @@
-// Voeg een event listener toe aan de knop
-// Maak een <li> element aan met de tekst uit het invoerveld
-// Voeg een verwijderknop toe aan elk <li> element
-
-
-const button = document.getElementById('add')
-let songlist = document.getElementById('list')
-const songinput = document.getElementById('input')
+const button = document.getElementById('addsong')
+let songlist = document.getElementById('songlist')
+const songinput = document.getElementById('songinput')
 
 button.addEventListener('click', () => {
   const input = songinput.value.trim();
