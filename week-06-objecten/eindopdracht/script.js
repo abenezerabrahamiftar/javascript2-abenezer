@@ -7,26 +7,67 @@ const users = [
 
 let filter = 'all';
 
+const usersList = document.querySelector('#users');
+const filterAll = document.querySelector('#filter-all');
+const filterAdmin = document.querySelector('#filter-admin');
+const userForm = document.querySelector('#user-form');
+const nameInput = document.querySelector('#name');
+const emailInput = document.querySelector('#email');
+const roleSelect = document.querySelector('#role');
+
+const defaultUser = { active: true };
+
 const showUsers = (users) => {
-  // Gebruik destructuring voor elke user: const { name, email, role, active } = user
-  // Toon elke user als een <article> in #users
+  usersList.innerHTML = '';
+
+  for (const user of users) {
+    const { name, email, role, active } = user;
+
+    usersList.innerHTML += `
+      <article>
+        <h3>${name}</h3>
+        <p>${email}</p>
+        <p>Rol: ${role}</p>
+        <p>${active ? 'Actief' : 'Niet actief'}</p>
+      </article>
+    `;
+  }
 };
 
 const filterUsers = () => {
-  // Als filter 'admin' is, toon alleen gebruikers met role === 'admin'
-  // Anders toon je alle gebruikers
-  // Roep showUsers() aan met de gefilterde lijst
+  let gefilterd = users;
+
+  if (filter === 'admin') {
+    gefilterd = users.filter(user => user.role === 'admin');
+  }
+
+  showUsers(gefilterd);
 };
 
-// Maak een eventlistener voor de #filter-admin button
-// Zet filter op 'admin' en roep filterUsers() aan
+filterAdmin.addEventListener('click', () => {
+  filter = 'admin';
+  filterUsers();
+});
 
-// Maak een eventlistener voor de #filter-all button
-// Zet filter op 'all' en roep filterUsers() aan
+filterAll.addEventListener('click', () => {
+  filter = 'all';
+  filterUsers();
+});
 
-// Maak een eventlistener voor het #user-form submit event
-// Lees naam, email en role uit de invoervelden
-// Maak een nieuw user object aan met spread op een default object
-// Voeg toe aan de array en roep filterUsers() aan
+userForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+
+  const newUser = {
+    ...defaultUser,
+    name: nameInput.value.trim(),
+    email: emailInput.value.trim(),
+    role: roleSelect.value,
+  };
+
+  users.push(newUser);
+  filterUsers();
+
+  userForm.reset();
+});
 
 filterUsers();

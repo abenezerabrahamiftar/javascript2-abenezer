@@ -4,10 +4,20 @@ const people = [
   { name: 'Sara', age: 22, city: 'Utrecht' },
 ];
 
+// 1. Originele lijst tonen (alleen naam en stad, met destructuring)
+const origineel = document.querySelector('#origineel');
 
-// 1. Toon in #origineel de originele lijst met alleen namen en steden.
-//    Gebruik destructuring in je .map().
-// 2. Maak met .map() en de spread operator een nieuwe array waarin
-//    de stad van elke persoon is gewijzigd naar 'Den Haag'.
-//    De originele people-array moet onveranderd blijven.
-// 3. Toon deze nieuwe lijst in #kopie, ook met destructuring.
+origineel.innerHTML += people
+  .map(({ name, city }) => `<p>${name} - ${city}</p>`)
+  .join('');
+
+// 2. Kopie maken met map en spread, stad wordt Den Haag
+const kopiePeople = people.map(person => ({ ...person, city: 'Den Haag' }));
+
+// 3. Kopie tonen in #kopie (ook met destructuring)
+const kopie = document.querySelector('#kopie');
+
+kopie.innerHTML += kopiePeople
+  .map(({ name, city }) => `<p>${name} - ${city}</p>`)
+  .join('');
+
