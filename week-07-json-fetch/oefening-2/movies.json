@@ -1,1 +1,7 @@
-[]
+
+[
+  { "title": "Inception", "director": "Christopher Nolan", "year": 2010, "genre": "Sci-fi" },
+  { "title": "The Dark Knight", "director": "Christopher Nolan", "year": 2008, "genre": "Actie" },
+  { "title": "Interstellar", "director": "Christopher Nolan", "year": 2014, "genre": "Sci-fi" },
+  { "title": "Parasite", "director": "Bong Joon-ho", "year": 2019, "genre": "Thriller" }
+]
