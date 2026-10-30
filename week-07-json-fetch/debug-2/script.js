@@ -1,5 +1,5 @@
-// Fout gevonden: _______________
-// Oplossing: _______________
+// Fout gevonden: er stond een komma na het laatste object in products.json (trailing comma), dat is ongeldig JSON
+// Oplossing: de komma na het laatste object verwijderd
 
 fetch('./products.json')
   .then(r => r.json())

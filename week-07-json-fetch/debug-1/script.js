@@ -1,7 +1,7 @@
-// Fout gevonden: _______________
-// Oplossing: _______________
+// Fout was: de bestandsnaam in fetch was verkeerd (new.json in plaats van news.json), daardoor 404 Not Found
+// Oplossing: de naam aangepast naar de echte bestandsnaam
 
-fetch('./new.json')
+fetch('./news.json')
   .then(r => r.json())
   .then(messages => {
     const list = document.querySelector('#results');
