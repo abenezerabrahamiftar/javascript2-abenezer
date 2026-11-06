@@ -1,23 +1,34 @@
 let allPokemon = [];
 
-// De API geeft een object terug met een 'results' array
-// Elk item heeft een 'name' property
-// Gebruik console.log(data) om de structuur te bekijken
+const searchBar = document.querySelector('#search-bar');
+const counter = document.querySelector('#counter');
+const pokemonList = document.querySelector('#pokemon-list');
 
-// De afbeelding van een Pokémon staat op:
-// https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{id}.png
-// Sla het id op via de index bij het laden: { ...pokemon, id: index + 1 }
+const showPokemon = (list) => {
+  pokemonList.innerHTML = list
+    .map(({ name, id }) => `
+      <article>
+        <h3>${name}</h3>
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png" alt="${name}">
+      </article>
+    `)
+    .join('');
+
+  counter.textContent = `${list.length} Pokémon`;
+};
 
 fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
   .then(response => response.json())
   .then(data => {
     console.log(data); // Bekijk de structuur
 
-    // Sla data.results op in allPokemon, voeg het id toe via de index
-    // Toon alle Pokémon in #pokemon-list met naam en afbeelding
-    // Toon het aantal in #counter
+    allPokemon = data.results.map((pokemon, index) => ({ ...pokemon, id: index + 1 }));
+    showPokemon(allPokemon);
   })
   .catch(error => console.error('Fout:', error));
 
-// Voeg een event listener toe aan #search-bar
-// Filter allPokemon op naam en herrender de lijst
+searchBar.addEventListener('input', () => {
+  const term = searchBar.value.toLowerCase();
+  const filtered = allPokemon.filter(pokemon => pokemon.name.toLowerCase().includes(term));
+  showPokemon(filtered);
+});
